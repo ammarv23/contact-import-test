@@ -3,12 +3,6 @@ const stringify = require('csv-stringify');
 const faker = require('faker');
 const fs = require('fs');
 
-commander
-    .option('-f, --force', 'Generate csv')
-    .option('-n, --number <n>', 'Number of contacts to generate', parseInt)
-    .option('-g, --group', 'Include Groups in the csv')
-    .parse(process.argv);
-
 const FILE_PATH = '~/contacts.csv';
 
 //Generate fake data
@@ -62,6 +56,12 @@ function generateEmails() {
 function buildCsv(data, cb) {
     fs.writeFile(FILE_PATH, data, 'utf8', cb)
 }
+
+commander
+    .option('-f, --force', 'Generate csv')
+    .option('-n, --number <n>', 'Number of contacts to generate', parseInt)
+    .option('-g, --group', 'Include Groups in the csv')
+    .parse(process.argv);
 
 if (!commander.number) {
     console.log('Must provide a number of contacts to generate');
